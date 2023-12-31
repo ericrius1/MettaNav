@@ -1,8 +1,8 @@
-import { Center, Clone, useGLTF } from "@react-three/drei"
+import { Clone, useGLTF } from "@react-three/drei"
 import { useThree } from "@react-three/fiber"
-import { useEffect, useLayoutEffect, useRef } from "react"
+import { useLayoutEffect, useRef } from "react"
 import { FlakesTexture } from 'three-stdlib'
-import { MeshStandardMaterial, Mesh } from "three"
+import { Mesh } from "three"
 import * as THREE from 'three'
 import { useControls } from "leva"
 import { StoreState, useStore } from '../store'
