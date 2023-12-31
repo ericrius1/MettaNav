@@ -13,11 +13,9 @@ type ArrowProps = {
 
 export function Arrow({ direction, ...props }: ArrowProps) {
     const { scene, materials } = useGLTF('/models/arrow.glb')
-    const { camera } = useThree()
     const arrow = useRef<THREE.Group<THREE.Object3DEventMap>>(null)
     const { width, height } = useThree((state) => state.viewport)
     const { setIconHovered } = useStore((state: StoreState) => ({ setIconHovered: state.setIconHovered }));
-
     const { normalRepeat } = useControls('Arrow', {
         normalRepeat: { value: 10, min: 1, max: 100, step: 1 },
     })
@@ -51,22 +49,17 @@ export function Arrow({ direction, ...props }: ArrowProps) {
         }
     }, [normalRepeat])
 
-    function rippleStart() {
-        console.log('ripple start')
+    function hoverStart() {
         setIconHovered(true)
     }
 
-    function rippleEnd() {
-        console.log('ripple end')
+    function hoverEnd() {
         setIconHovered(false)
     }
 
     return (
-
-        <group {...props} ref={arrow} position={[direction === 'right' ? -width / 2.5 : width / 2.5, -height / 2.5, 0]} onPointerEnter={rippleStart} onPointerLeave={rippleEnd}>
+        <group {...props} ref={arrow} position={[direction === 'right' ? -width / 2.5 : width / 2.5, -height / 2.5, 0]} onPointerEnter={hoverStart} onPointerLeave={hoverEnd}>
             <Clone object={scene} />
-            {/* <primitive object={scene} /> */}
-            {/* <pointLight position={[2, 10, 10]} intensity={100} distance={1000} /> */}
         </group>
     )
 }
