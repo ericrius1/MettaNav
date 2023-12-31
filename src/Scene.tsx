@@ -1,4 +1,4 @@
-import { Environment, OrbitControls, RandomizedLight, Sky, useGLTF, useTexture } from '@react-three/drei'
+import { Environment, OrbitControls, PerspectiveCamera, PresentationControls, RandomizedLight, Sky, useGLTF, useTexture } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import { useControls } from 'leva'
 import { Perf } from 'r3f-perf'
@@ -21,17 +21,17 @@ function Scene() {
   const envMap = useTexture('/day.jpg')
   return (
     <>
-      <OrbitControls makeDefault zoomSpeed={0.7} />
+      <PerspectiveCamera makeDefault fov={55} near={.1} far={10000} position={[0, 0, 5]} />
+
       {performance && <Perf position='top-left' />}
 
-      <Environment preset="city" />
-      {/* < Environment near={.1} far={100} resolution={256}>
+      {/* <Environment preset="city" /> */}
+      < Environment near={.1} far={100} resolution={256}>
         <mesh >
           <sphereGeometry args={[1, 32, 32]} />
           <meshBasicMaterial map={envMap} side={THREE.BackSide} />
         </mesh>
-      </Environment > */}
-
+      </Environment >
 
       <Arrow direction="right" />
       {/* <Frame id="01" name="dinasour" position-y={-5}>

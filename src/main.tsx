@@ -34,7 +34,6 @@ function Main() {
 
         shadows
       >
-        <PerspectiveCamera makeDefault fov={55} near={.1} far={10000} position={[0, 0, 5]} />
         <Scene />
       </Canvas>
     </div >
