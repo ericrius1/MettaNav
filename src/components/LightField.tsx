@@ -15,9 +15,9 @@ export function LightField() {
     useFrame((state, delta) => {
         if (backgroundMesh.current) {
             if (iconHovered) {
-                backgroundMesh.current.rotation.y += delta * .1
+                // backgroundMesh.current.rotation.y += delta * .1
             } else {
-                backgroundMesh.current.rotation.y += delta * .01
+                // backgroundMesh.current.rotation.y += delta * .01
             }
         }
     })
@@ -28,10 +28,10 @@ export function LightField() {
                     <sphereGeometry args={[1, 32, 32]} />
                     <meshBasicMaterial map={envMap} side={THREE.BackSide} />
                 </mesh>
-                <mesh>
+                {/* <mesh>
                     <boxGeometry args={[.02, 1, 1]} />
                     <meshBasicMaterial side={THREE.BackSide} />
-                </mesh>
+                </mesh> */}
             </Environment >
 
         </>

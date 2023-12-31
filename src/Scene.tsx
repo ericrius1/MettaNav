@@ -10,6 +10,7 @@ import { DeepArt } from './components/DeepArt'
 import { Arrow } from './components/Arrow'
 import { LightField } from './components/LightField'
 
+
 function Scene() {
   const { performance } = useControls('Monitoring', {
     performance: false,
@@ -22,7 +23,7 @@ function Scene() {
   return (
     <>
       <PerspectiveCamera makeDefault fov={55} near={.1} far={10000} position={[0, 0, 5]} />
-
+      <OrbitControls />
       {performance && <Perf position='top-left' />}
 
       {/* <Environment preset="city" /> */}
