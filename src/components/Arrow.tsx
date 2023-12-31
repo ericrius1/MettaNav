@@ -12,7 +12,7 @@ type ArrowProps = {
 export function Arrow({ direction, ...props }: ArrowProps) {
     const { scene, materials } = useGLTF('/models/arrow.glb')
     const { camera } = useThree()
-    const arrow = useRef()
+    const arrow = useRef<THREE.Group<THREE.Object3DEventMap>>(null)
     useLayoutEffect(function setArrowDirection() {
         if (direction === 'left') {
             scene.rotation.y = Math.PI / 2
@@ -34,23 +34,25 @@ export function Arrow({ direction, ...props }: ArrowProps) {
                 obj.receiveShadow = obj.castShadow = true;
             }
         });
-        materials.arrow.color.set('orange')
-        materials.arrow.roughness = .1
-        // materials.arrow.metalness = 0
-        materials.arrow.normalMap = new THREE.CanvasTexture(new FlakesTexture(), THREE.UVMapping, THREE.RepeatWrapping, THREE.RepeatWrapping)
-        materials.arrow.normalMap.repeat.set(40, 40)
-        materials.arrow.normalScale.set(0.1, 0.1)
+        if (materials.arrow instanceof THREE.MeshStandardMaterial) {
+            materials.arrow.envMapIntensity = 0.3
+            materials.arrow.color.set('orange')
+            materials.arrow.normalMap = new THREE.CanvasTexture(new FlakesTexture(), THREE.UVMapping, THREE.RepeatWrapping, THREE.RepeatWrapping);
+            materials.arrow.normalMap.repeat.set(40, 40);
+            materials.arrow.normalScale.set(0.1, 0.1);
+        }
+
         // camera.add(arrow.current);
         return () => {
             // Remove the object from the camera when the component unmounts
-            camera.remove(arrow.current);
+            // camera.remove(arrow.current);
         };
     }, [camera])
 
     return (
         <group {...props} ref={arrow} position={[0, 0, 0]}>
             <primitive object={scene} />
-            {/* <pointLight position={[0, 10, 10]} intensity={10000} distance={1000} /> */}
+            {/* <pointLight position={[2, 10, 10]} intensity={100} distance={1000} /> */}
         </group>
 
     )

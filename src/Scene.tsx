@@ -25,8 +25,8 @@ function Scene() {
       {performance && <Perf position='top-left' />}
 
       <Environment preset="city" />
-      {/* < Environment near={1} far={10000} resolution={256}>
-        <mesh scale={100}>
+      {/* < Environment near={.1} far={100} resolution={256}>
+        <mesh >
           <sphereGeometry args={[1, 32, 32]} />
           <meshBasicMaterial map={envMap} side={THREE.BackSide} />
         </mesh>
