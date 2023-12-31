@@ -8,6 +8,7 @@ import * as THREE from 'three'
 import { Frame } from './components/Frame'
 import { DeepArt } from './components/DeepArt'
 import { Arrow } from './components/Arrow'
+import { LightField } from './components/LightField'
 
 function Scene() {
   const { performance } = useControls('Monitoring', {
@@ -18,7 +19,6 @@ function Scene() {
   const cubeRef = useRef<Mesh<BoxGeometry, MeshBasicMaterial>>(null)
 
 
-  const envMap = useTexture('/day.jpg')
   return (
     <>
       <PerspectiveCamera makeDefault fov={55} near={.1} far={10000} position={[0, 0, 5]} />
@@ -26,13 +26,7 @@ function Scene() {
       {performance && <Perf position='top-left' />}
 
       {/* <Environment preset="city" /> */}
-      < Environment near={.1} far={100} resolution={256}>
-        <mesh >
-          <sphereGeometry args={[1, 32, 32]} />
-          <meshBasicMaterial map={envMap} side={THREE.BackSide} />
-        </mesh>
-      </Environment >
-
+      <LightField />
       <Arrow direction="right" />
       <Arrow direction="left" />
 

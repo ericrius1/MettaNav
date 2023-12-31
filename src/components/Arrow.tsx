@@ -5,6 +5,7 @@ import { FlakesTexture } from 'three-stdlib'
 import { MeshStandardMaterial, Mesh } from "three"
 import * as THREE from 'three'
 import { useControls } from "leva"
+import { StoreState, useStore } from '../store'
 
 type ArrowProps = {
     direction: 'left' | 'right' | 'up' | 'down',
@@ -15,6 +16,7 @@ export function Arrow({ direction, ...props }: ArrowProps) {
     const { camera } = useThree()
     const arrow = useRef<THREE.Group<THREE.Object3DEventMap>>(null)
     const { width, height } = useThree((state) => state.viewport)
+    const { setIconHovered } = useStore((state: StoreState) => ({ setIconHovered: state.setIconHovered }));
 
     const { normalRepeat } = useControls('Arrow', {
         normalRepeat: { value: 10, min: 1, max: 100, step: 1 },
@@ -33,7 +35,6 @@ export function Arrow({ direction, ...props }: ArrowProps) {
             arrow.current.rotation.x = -Math.PI / 2
         }
     })
-
     useLayoutEffect(function setArrowMaterial() {
         scene.traverse((obj) => {
             if (obj instanceof Mesh) {
@@ -48,21 +49,24 @@ export function Arrow({ direction, ...props }: ArrowProps) {
             materials.arrow.normalScale.set(0.1, 0.1);
             materials.arrow.roughness = .1
         }
-
     }, [normalRepeat])
 
-    useEffect(() => {
+    function rippleStart() {
+        console.log('ripple start')
+        setIconHovered(true)
+    }
 
-    }, [camera])
+    function rippleEnd() {
+        console.log('ripple end')
+        setIconHovered(false)
+    }
 
     return (
 
-        <group {...props} ref={arrow} position={[direction === 'right' ? -width / 2.5 : width / 2.5, -height / 2.5, 0]}>
+        <group {...props} ref={arrow} position={[direction === 'right' ? -width / 2.5 : width / 2.5, -height / 2.5, 0]} onPointerEnter={rippleStart} onPointerLeave={rippleEnd}>
             <Clone object={scene} />
             {/* <primitive object={scene} /> */}
             {/* <pointLight position={[2, 10, 10]} intensity={100} distance={1000} /> */}
         </group>
-
-
     )
 }
