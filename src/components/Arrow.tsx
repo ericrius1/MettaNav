@@ -37,7 +37,7 @@ export function Arrow({ direction, ...props }: ArrowProps) {
         if (materials.arrow instanceof THREE.MeshStandardMaterial) {
             materials.arrow.envMapIntensity = 0.3
             materials.arrow.color.set('orange')
-            materials.arrow.normalMap = new THREE.CanvasTexture(new FlakesTexture(), THREE.UVMapping, THREE.RepeatWrapping, THREE.RepeatWrapping);
+            materials.arrow.normalMap = new THREE.CanvasTexture(new FlakesTexture() as HTMLCanvasElement, THREE.UVMapping, THREE.RepeatWrapping, THREE.RepeatWrapping);
             materials.arrow.normalMap.repeat.set(40, 40);
             materials.arrow.normalScale.set(0.1, 0.1);
         }
