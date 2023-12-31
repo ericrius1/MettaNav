@@ -15,9 +15,9 @@ export function LightField() {
     useFrame((state, delta) => {
         if (backgroundMesh.current) {
             if (iconHovered) {
-                // backgroundMesh.current.rotation.y += delta * .1
+                backgroundMesh.current.rotation.y += delta * .1
             } else {
-                // backgroundMesh.current.rotation.y += delta * .01
+                backgroundMesh.current.rotation.y += delta * .01
             }
         }
     })

@@ -1,6 +1,6 @@
 import { Clone, useGLTF } from "@react-three/drei"
 import { useFrame, useThree } from "@react-three/fiber"
-import { useLayoutEffect, useRef, useState } from "react"
+import { useEffect, useLayoutEffect, useRef, useState } from "react"
 import { FlakesTexture } from 'three-stdlib'
 import { Mesh } from "three"
 import * as THREE from 'three'
@@ -12,6 +12,8 @@ import { damp } from "maath/easing"
 type ArrowProps = {
     direction: 'left' | 'right' | 'up' | 'down',
 }
+
+const flakesTexture = new FlakesTexture() as HTMLCanvasElement
 
 export function Arrow({ direction, ...props }: ArrowProps) {
     const { nodes, materials } = useGLTF('/models/arrow.glb')
@@ -45,13 +47,13 @@ export function Arrow({ direction, ...props }: ArrowProps) {
         });
         if (materials.arrow instanceof THREE.MeshStandardMaterial) {
             materials.arrow.color.set('orange')
-            materials.arrow.normalMap = new THREE.CanvasTexture(new FlakesTexture() as HTMLCanvasElement, THREE.UVMapping, THREE.RepeatWrapping, THREE.RepeatWrapping);
+            materials.arrow.normalMap = new THREE.CanvasTexture(flakesTexture as HTMLCanvasElement, THREE.UVMapping, THREE.RepeatWrapping, THREE.RepeatWrapping);
             materials.arrow.normalMap.repeat.set(normalRepeat, normalRepeat);
             materials.arrow.normalScale.set(.1, .1);
             materials.arrow.roughness = 0.1
-            materials.arrow.metalness = 1
+            materials.arrow.metalness = 1.0
         }
-    }, [normalRepeat, nodes.arrow])
+    }, [normalRepeat])
 
     function hoverStart() {
         setIconHovered(true)
