@@ -34,6 +34,8 @@ function Scene() {
       </Environment >
 
       <Arrow direction="right" />
+      <Arrow direction="left" />
+
       {/* <Frame id="01" name="dinasour" position-y={-5}>
         <DeepArt imagePath="/image.jpg" depthMapPath="/depth.jpg" />
       </Frame> */}

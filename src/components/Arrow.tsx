@@ -1,4 +1,4 @@
-import { Center, useGLTF } from "@react-three/drei"
+import { Center, Clone, useGLTF } from "@react-three/drei"
 import { useThree } from "@react-three/fiber"
 import { useEffect, useLayoutEffect, useRef } from "react"
 import { FlakesTexture } from 'three-stdlib'
@@ -21,16 +21,16 @@ export function Arrow({ direction, ...props }: ArrowProps) {
     })
     useLayoutEffect(function setArrowDirection() {
         if (direction === 'left') {
-            scene.rotation.y = Math.PI / 2
+            arrow.current.rotation.y = Math.PI / 2
         }
         if (direction === 'right') {
-            scene.rotation.y = -Math.PI / 2
+            arrow.current.rotation.y = -Math.PI / 2
         }
         if (direction === 'up') {
-            scene.rotation.x = Math.PI / 2
+            arrow.current.rotation.x = Math.PI / 2
         }
         if (direction === 'down') {
-            scene.rotation.x = -Math.PI / 2
+            arrow.current.rotation.x = -Math.PI / 2
         }
     })
 
@@ -57,8 +57,9 @@ export function Arrow({ direction, ...props }: ArrowProps) {
 
     return (
 
-        <group {...props} ref={arrow} position={[width / 2.5, -height / 2.5, 0]}>
-            <primitive object={scene} />
+        <group {...props} ref={arrow} position={[direction === 'right' ? -width / 2.5 : width / 2.5, -height / 2.5, 0]}>
+            <Clone object={scene} />
+            {/* <primitive object={scene} /> */}
             {/* <pointLight position={[2, 10, 10]} intensity={100} distance={1000} /> */}
         </group>
 
