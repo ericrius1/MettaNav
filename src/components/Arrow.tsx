@@ -13,6 +13,8 @@ type ArrowProps = {
   direction: 'left' | 'right' | 'up' | 'down'
 }
 
+type MotionGroup = THREE.Group & GroupProps
+
 const flakesTexture = new FlakesTexture() as HTMLCanvasElement
 const normalMap = new THREE.CanvasTexture(
   flakesTexture as HTMLCanvasElement,
@@ -27,7 +29,7 @@ export function Arrow({ direction, ...props }: ArrowProps) {
     normalRepeat: { value: 10, min: 1, max: 15, step: 1 },
   })
   const material = useRef<THREE.MeshStandardMaterial>(null)
-  const arrow = useRef<GroupProps>(null)
+  const arrow = useRef<MotionGroup>(null)
   const { width, height } = useThree((state) => state.viewport)
   const setIconHovered = useStore((state: StoreState) => state.setIconHovered)
   const [iconHovered, setIconHoveredLocal] = useState(false)
@@ -35,6 +37,7 @@ export function Arrow({ direction, ...props }: ArrowProps) {
   const rotationSpeed = useRef(0)
 
   useLayoutEffect(function setArrowDirection() {
+    if (arrow.current?.rotation === undefined) return
     if (direction === 'left') {
       arrow.current.rotation.y = Math.PI / 2
     }
