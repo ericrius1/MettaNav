@@ -22,6 +22,7 @@ const normalMap = new THREE.CanvasTexture(
   THREE.RepeatWrapping,
   THREE.RepeatWrapping
 )
+
 const normalScale = new THREE.Vector2(0.1, 0.1)
 export function Arrow({ direction, ...props }: ArrowProps) {
   const { nodes } = useGLTF('/models/arrow.glb')
@@ -33,7 +34,7 @@ export function Arrow({ direction, ...props }: ArrowProps) {
   const { width, height } = useThree((state) => state.viewport)
   const setIconHovered = useStore((state: StoreState) => state.setIconHovered)
   const [iconHovered, setIconHoveredLocal] = useState(false)
-  console.log('rerender')
+
   const rotationSpeed = useRef(0)
 
   useLayoutEffect(function setArrowDirection() {
@@ -65,11 +66,13 @@ export function Arrow({ direction, ...props }: ArrowProps) {
   function hoverStart() {
     setIconHovered(true)
     setIconHoveredLocal(true)
+    document.body.style.cursor = 'pointer'
   }
 
   function hoverEnd() {
     setIconHovered(false)
     setIconHoveredLocal(false)
+    document.body.style.cursor = 'default'
   }
 
   const arrowVariants = {
