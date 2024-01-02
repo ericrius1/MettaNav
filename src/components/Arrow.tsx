@@ -96,7 +96,7 @@ export function Arrow({ direction, ...props }: ArrowProps) {
     <motion.group
       {...props}
       ref={arrow}
-      position={[direction === 'right' ? -width / 2.5 : width / 2.5, -height / 2.5, 0]}
+      position={[direction === 'right' ? width / 2.5 : -width / 2.5, -height / 2.5, 0]}
       onPointerEnter={hoverStart}
       onPointerLeave={hoverEnd}
       variants={arrowVariants}

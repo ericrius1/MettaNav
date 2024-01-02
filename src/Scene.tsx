@@ -40,8 +40,8 @@ function Scene() {
 
       {/* <Environment preset="city" /> */}
       <LightField />
-      <Arrow direction='right' />
       <Arrow direction='left' />
+      <Arrow direction='right' />
 
       {/* <Frame id="01" name="dinasour" position-y={-5}>
         <DeepArt imagePath="/image.jpg" depthMapPath="/depth.jpg" />
