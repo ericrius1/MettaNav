@@ -112,6 +112,7 @@ export function Arrow({ direction, ...props }: ArrowProps) {
           color={'orange'}
           metalness={1}
           ref={material}
+          side={2}
         />
       </Clone>
     </motion.group>
