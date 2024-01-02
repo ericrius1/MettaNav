@@ -1,4 +1,13 @@
-import { Environment, OrbitControls, PerspectiveCamera, PresentationControls, RandomizedLight, Sky, useGLTF, useTexture } from '@react-three/drei'
+import {
+  Environment,
+  OrbitControls,
+  PerspectiveCamera,
+  PresentationControls,
+  RandomizedLight,
+  Sky,
+  useGLTF,
+  useTexture,
+} from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
 import { useControls } from 'leva'
 import { Perf } from 'r3f-perf'
@@ -10,26 +19,29 @@ import { DeepArt } from './components/DeepArt'
 import { Arrow } from './components/Arrow'
 import { LightField } from './components/LightField'
 
-
 function Scene() {
   const { performance } = useControls('Monitoring', {
     performance: false,
   })
 
-
   const cubeRef = useRef<Mesh<BoxGeometry, MeshBasicMaterial>>(null)
-
 
   return (
     <>
-      <PerspectiveCamera makeDefault fov={55} near={.1} far={10000} position={[0, 0, 5]} />
-      <OrbitControls />
+      <PerspectiveCamera
+        makeDefault
+        fov={55}
+        near={0.1}
+        far={10000}
+        position={[0, 0, 5]}
+      />
+      {/* <OrbitControls /> */}
       {performance && <Perf position='top-left' />}
 
       {/* <Environment preset="city" /> */}
       <LightField />
-      <Arrow direction="right" />
-      <Arrow direction="left" />
+      <Arrow direction='right' />
+      <Arrow direction='left' />
 
       {/* <Frame id="01" name="dinasour" position-y={-5}>
         <DeepArt imagePath="/image.jpg" depthMapPath="/depth.jpg" />
@@ -37,9 +49,5 @@ function Scene() {
     </>
   )
 }
-
-
-
-
 
 export { Scene }
