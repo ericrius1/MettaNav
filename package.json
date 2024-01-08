@@ -13,7 +13,7 @@
     "@react-three/fiber": "^8.15.12",
     "@types/three": "^0.160.0",
     "framer-motion": "^10.16.16",
-    "framer-motion-3d": "^10.16.16",
+    "framer-motion-3d": "^10.17.9",
     "leva": "^0.9.35",
     "maath": "^0.10.7",
     "r3f-perf": "^7.1.2",
